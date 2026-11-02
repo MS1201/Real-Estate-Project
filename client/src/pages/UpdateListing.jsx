@@ -86,10 +86,12 @@ export default function UpdateListing() {
   const storeImage = async (file) => {
     const data = new FormData();
     data.append('file', file);
-    data.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'mern_estate');
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dlf8wfoti';
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'mern_estate';
+    data.append('upload_preset', uploadPreset);
 
     const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       {
         method: 'POST',
         body: data,
